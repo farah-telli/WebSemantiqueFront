@@ -1,0 +1,82 @@
+<div class="container">
+    <h2 class="title">Events List</h2>
+  
+    <!-- Liste des événements dans un tableau -->
+    <table class="event-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td>{{ event.title }}</td>
+          <td>{{ event.date | date }}</td>
+          <td>{{ event.location }}</td>
+          <td>
+            <button class="edit" (click)="editEvent(event)">Edit</button>
+            <button class="delete" (click)="deleteEvent(event)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Formulaire pour ajouter un nouvel événement -->
+    <div class="form-section">
+      <h3 class="form-title">Add New Event</h3>
+      <label>Title:
+        <input class="input-field" [(ngModel)]="newEvent.title" placeholder="Enter title" />
+      </label><br>
+      <label>Description:
+        <textarea class="input-field" [(ngModel)]="newEvent.description" placeholder="Enter description"></textarea>
+      </label><br>
+      <label>Date:
+        <input class="input-field" type="date" [(ngModel)]="newEvent.date" />
+      </label><br>
+      <label>Location:
+        <input class="input-field" [(ngModel)]="newEvent.location" placeholder="Enter location" />
+      </label><br>
+      <label>Organizer:
+        <input class="input-field" [(ngModel)]="newEvent.organizer" placeholder="Enter organizer name" />
+      </label><br>
+      <label>Max Participants:
+        <input class="input-field" type="number" [(ngModel)]="newEvent.maxParticipants" placeholder="Enter max participants" />
+      </label><br>
+      <label>Image URL:
+        <input class="input-field" [(ngModel)]="newEvent.image" placeholder="Enter image URL" />
+      </label><br>
+      <button class="add" (click)="addEvent()">Add Event</button>
+    </div>
+  
+    <!-- Formulaire de modification de l'événement -->
+    <div *ngIf="selectedEvent" class="form-section">
+      <h3 class="form-title">Edit Event</h3>
+      <label>Title:
+        <input class="input-field" [(ngModel)]="selectedEvent.title" />
+      </label><br>
+      <label>Description:
+        <textarea class="input-field" [(ngModel)]="selectedEvent.description"></textarea>
+      </label><br>
+      <label>Date:
+        <input class="input-field" type="date" [(ngModel)]="selectedEvent.date" />
+      </label><br>
+      <label>Location:
+        <input class="input-field" [(ngModel)]="selectedEvent.location" />
+      </label><br>
+      <label>Organizer:
+        <input class="input-field" [(ngModel)]="selectedEvent.organizer" />
+      </label><br>
+      <label>Max Participants:
+        <input class="input-field" type="number" [(ngModel)]="selectedEvent.maxParticipants" />
+      </label><br>
+      <label>Image URL:
+        <input class="input-field" [(ngModel)]="selectedEvent.image" />
+      </label><br>
+      <button class="save" (click)="updateEvent()">Save</button>
+      <button class="cancel" (click)="selectedEvent = null">Cancel</button>
+    </div>
+  </div>
+  
